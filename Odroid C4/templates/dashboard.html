@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Water Dispenser Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+      }
+      table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Water Dispenser Dashboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Volume Dispensed (ml)</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in dispensed_data %}
+        <tr>
+          <td>{{ item.volume }}</td>
+          <td>{{ item.time }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
