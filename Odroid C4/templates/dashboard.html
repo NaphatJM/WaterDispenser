@@ -40,14 +40,35 @@
           <th>Time</th>
         </tr>
       </thead>
-      <tbody>
-        {% for item in dispensed_data %}
-        <tr>
-          <td>{{ item.volume }}</td>
-          <td>{{ item.time }}</td>
-        </tr>
-        {% endfor %}
+      <tbody id="data-body">
+        <!-- Data rows will be dynamically loaded here -->
       </tbody>
     </table>
+    <script>
+      function fetchData() {
+        fetch("/api/data")
+          .then((response) => response.json())
+          .then((data) => {
+            const tbody = document.getElementById("data-body");
+            tbody.innerHTML = ""; // Clear the table body
+
+            // Populate the table with the fetched data
+            data.forEach((item) => {
+              const row = `<tr>
+                <td>${item.volume}</td>
+                <td>${item.time}</td>
+              </tr>`;
+              tbody.innerHTML += row;
+            });
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      }
+
+      // Fetch data every 10 seconds
+      setInterval(fetchData, 10000);
+
+      // Fetch data on page load
+      fetchData();
+    </script>
   </body>
 </html>

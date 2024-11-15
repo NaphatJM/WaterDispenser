@@ -1,3 +1,5 @@
+# For rendering dashboard page 
+
 from flask import Flask, jsonify, render_template, request, json
 
 app = Flask(__name__)
