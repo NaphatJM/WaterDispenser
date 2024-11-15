@@ -2,6 +2,7 @@
 #include <Arduino.h>
 
 //---------------------------------------------------------------------------------------------
+//R for Right & L for Left
 #define echoPinLowR 13
 #define trigPinLowR 12
 
@@ -43,6 +44,7 @@ void setup()
   volumeCalculated = false;
   bottlePresent = false;
 
+  //initial ค่าความกว้างของเลเซอร์
   distanceTL = 29;
   distanceML = 29;
 }
@@ -58,7 +60,7 @@ void call_formular()
 
   int TALL; 
 
-
+  // เลือกที่จะใช้ radiusBottom ในทุก เงื่อนไขความสูง เพื่อความแม่นยำ
   if (SensorLV == TOP) 
   {
     radiusEffective = radiusBottom;  
@@ -84,7 +86,8 @@ void call_formular()
 
   if (!volumeCalculated) {
     int new_Volume = Volume * 0.9;
-    Serial.println(new_Volume);
+    // ที่ส่งสองรอบเพราะ hardware ของจริง ส่งครั้งเดียวแล้วไม่ขึ้น 
+    // Serial.println(new_Volume);
     Serial.println(new_Volume);
     volumeCalculated = true;
   }
@@ -101,6 +104,7 @@ float trigger(int pintrig, int pinecho)
   for (int i = 0; i < numReadings; i++) {
     long duration;
 
+    // เป็นคำสั่งตามใน document
     digitalWrite(pintrig, LOW);
     delayMicroseconds(2);
     digitalWrite(pintrig, HIGH);
